@@ -1,30 +1,3 @@
-// Interfaces for hobby tool parameters
-interface HobbyParameters {
-  hobby: string;
-}
-
-/**
- * Dilip's Hobby Tool: Returns a fixed hobby string
- */
-async function dilipsHobby(parameters: HobbyParameters) {
-  // The parameter is accepted but not used in the response as per requirements
-  return {
-    hobby: 'jogging and coding: DA'
-  };
-}
-
-tool({
-  name: "dilips-hobby",
-  description: "Returns Dilip's hobby as a fixed string.",
-  parameters: [
-    {
-      name: "hobby",
-      type: ParameterType.String,
-      description: "Dilip's hobby (input is ignored, output is fixed)",
-      required: true
-    }
-  ]
-})(dilipsHobby);
 import express from 'express';
 import { ToolsService, tool, ParameterType } from '@optimizely-opal/opal-tools-sdk';
 
@@ -43,6 +16,20 @@ interface GreetingParameters {
 
 interface DateParameters {
   format?: string;
+}
+
+interface HobbyParameters {
+  hobby: string;
+}
+
+/**
+ * Dilip's Hobby Tool: Returns a fixed hobby string
+ */
+async function dilipsHobby(parameters: HobbyParameters) {
+  // The parameter is accepted but not used in the response as per requirements
+  return {
+    hobby: 'jogging and coding: DA'
+  };
 }
 
 /**
@@ -138,6 +125,19 @@ tool({
     }
   ]
 })(todaysDate);
+
+tool({
+  name: "dilips-hobby",
+  description: "Returns Dilip's hobby as a fixed string.",
+  parameters: [
+    {
+      name: "hobby",
+      type: ParameterType.String,
+      description: "Dilip's hobby (input is ignored, output is fixed)",
+      required: true
+    }
+  ]
+})(dilipsHobby);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

@@ -11,6 +11,15 @@ app.use(express_1.default.json());
 // Create Tools Service
 const toolsService = new opal_tools_sdk_1.ToolsService(app);
 /**
+ * Dilip's Hobby Tool: Returns a fixed hobby string
+ */
+async function dilipsHobby(parameters) {
+    // The parameter is accepted but not used in the response as per requirements
+    return {
+        hobby: 'jogging and coding: DA'
+    };
+}
+/**
  * Greeting Tool: Greets a person in a random language
  */
 // Apply tool decorator after function definition
@@ -63,7 +72,7 @@ async function todaysDate(parameters) {
         formattedDate = today.toISOString().split('T')[0];
     }
     return {
-        date: formattedDate,
+        date: `this is Dilip's custom tool: ${formattedDate}`,
         format: format,
         timestamp: today.getTime() / 1000
     };
@@ -99,6 +108,18 @@ async function todaysDate(parameters) {
         }
     ]
 })(todaysDate);
+(0, opal_tools_sdk_1.tool)({
+    name: "dilips-hobby",
+    description: "Returns Dilip's hobby as a fixed string.",
+    parameters: [
+        {
+            name: "hobby",
+            type: opal_tools_sdk_1.ParameterType.String,
+            description: "Dilip's hobby (input is ignored, output is fixed)",
+            required: true
+        }
+    ]
+})(dilipsHobby);
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
