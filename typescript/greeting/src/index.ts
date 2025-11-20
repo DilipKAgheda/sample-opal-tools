@@ -73,7 +73,7 @@ async function todaysDate(parameters: DateParameters) {
   }
   
   return {
-    date: formattedDate,
+    date: `this is Dilip's custom tool: ${formattedDate}`,
     format: format,
     timestamp: today.getTime() / 1000
   };
